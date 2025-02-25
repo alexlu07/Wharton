@@ -44,6 +44,7 @@ labels = data.columns[3:18]
 for label in tqdm(labels):
     data["score"] = data[label]
     data["opponent_score"] = data.groupby("game_id")["score"].transform("sum") - data["score"]
+    data = data.groupby("game_id").head(1)
     
     games = data[["team_id", "opponent_team_id", "score", "opponent_score"]].to_numpy()
     result = fit_opr_dpr(games, len(teams))
