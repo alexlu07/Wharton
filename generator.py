@@ -41,6 +41,7 @@ def fit_opr_dpr(games, num_teams):
     return least_squares(loss_function, params)
 
 labels = data.columns[3:18]
+labels = data.columns[9:18]
 for label in tqdm(labels):
     data["score"] = data[label]
     data["opponent_score"] = data.groupby("game_id")["score"].transform("sum") - data["score"]
